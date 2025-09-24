@@ -1,0 +1,22 @@
+{
+  "name": "RiekehofBasicTheme",
+  "author": "S Punkt Online GmbH",
+  "views": [
+     "@Storefront",
+     "@Plugins",
+     "@RiekehofBasicTheme"
+  ],
+  "style": [
+    "app/storefront/src/scss/overrides.scss",
+    "@Storefront",
+    "app/storefront/src/scss/base.scss"
+  ],
+  "script": [
+    "@Storefront",
+    "app/storefront/dist/storefront/js/riekehof-basic-theme/riekehof-basic-theme.js"
+  ],
+  "asset": [
+    "@Storefront",
+    "app/storefront/src/assets"
+  ]
+}

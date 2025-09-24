@@ -1,0 +1,83 @@
+footer.footer-main{
+  .footer-top {
+    padding: rem-calc( 50px ) 0 rem-calc( 50px );
+    background-color: #eddfd7;
+    .footer-main__title {
+     color: #684239;
+    }
+
+    ul.footer-main__link_list li {
+      a {
+        color: #000;
+        font-size: rem-calc( 16px );
+        text-decoration: none;
+        transition-duration: .3s;
+        &:hover {
+          color: #684239;
+        }
+      }
+    }
+    ul.footer-main__img_list {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      li {
+        margin-right: rem-calc( 10px );
+        margin-bottom: rem-calc( 10px );
+      }
+
+    }
+  }
+
+  ul.footer-payment-logos, ul.footer-shipping-logos {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    li {
+      margin-right: rem-calc( 10px );
+      margin-bottom: rem-calc( 10px );
+      flex-basis: 100px;
+    }
+    .footer-logo-image {
+      height: 50px;
+      max-height: 50px;
+    }
+  }
+
+  .footer-bottom {
+    background: linear-gradient(to right, #eddfd7, $sw-color-brand-primary);
+
+    .footer-vat {
+      p {
+        margin-bottom: rem-calc( 16px );;
+        font-size: rem-calc( 16px );
+        color: #2b3136;
+      }
+      a {
+        color: #2b3136;
+      }
+    }
+  }
+
+  .footer-copyright {
+    p {
+      font-size: rem-calc( 16px );
+      color: #fff;
+    }
+    a {
+      color: #fff;
+    }
+  }
+}
+
+.scroll-up-button {
+  left: 1.5rem;
+  button {
+    background: #444444FF;
+    border-radius: 5px;
+  }
+}

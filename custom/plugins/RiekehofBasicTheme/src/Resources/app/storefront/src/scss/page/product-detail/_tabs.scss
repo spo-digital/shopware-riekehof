@@ -1,0 +1,45 @@
+.product-detail-tabs, .product-detail-description.tab-pane-container {
+    .product-detail-tab-navigation-link {
+        padding: 5px 10px;
+        background-color: $sw-color-brand-secondary;
+        &.active {
+            background-color: $sw-color-brand-primary;
+        }
+    }
+    .card-tabs {
+        .nav-item {
+            margin-right: 0;
+        }
+        .nav-link {
+            border-bottom: 2px solid $sw-color-brand-primary;
+            &:hover {
+                background-color: $sw-color-brand-primary;
+                color: #fff;
+            }
+        }
+    }
+
+    .property-feature-set-headline {
+       background-color: $sw-color-brand-secondary;
+       width: fit-content;
+        padding: 5px 20px;
+        font-weight: 300;
+    }
+    .property-feature {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 1.5rem;
+
+        &__icon {
+            height: 60px;
+            max-width: 80px;
+        }
+
+        &__title {
+            text-align: center;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+        }
+    }
+}

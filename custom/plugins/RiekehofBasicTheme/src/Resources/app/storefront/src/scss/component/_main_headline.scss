@@ -1,0 +1,14 @@
+.main_headline {
+  height: 20vh;
+  max-height: 200px;
+  display: flex;
+  align-items: center;
+  padding-left: rem-calc( 30px );
+  background-color: $sw-color-brand-primary;
+  h1 {
+    color: #fff;
+  }
+  @include media-breakpoint-up( md ) {
+    padding-top: rem-calc( 50px );
+  }
+}

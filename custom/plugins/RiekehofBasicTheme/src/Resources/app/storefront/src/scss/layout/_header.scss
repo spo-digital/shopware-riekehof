@@ -1,0 +1,15 @@
+header {
+  background: linear-gradient(to right, #eddfd7, $sw-color-brand-primary);
+}
+header .container, .nav-main .container {
+ //background: linear-gradient(to right, #eddfd7, $sw-color-brand-primary);
+  //background-color: #eddfd7;
+}
+
+header .rh-topbar .container {
+  background: transparent;
+}
+
+.header-cart-total {
+  color: #2b3136;
+}

@@ -1,0 +1,14 @@
+.navigation-flyout-categories {
+    column-count: 2;
+}
+.navigation-flyout-link.is-level-0 {
+    font-weight: 300;
+}
+.navigation-flyout-link.active {
+    font-weight: 700;
+}
+.navigation-flyout-categories .has-children {
+    .navigation-flyout-link.is-level-0 {
+        font-weight: 700;
+    }
+}

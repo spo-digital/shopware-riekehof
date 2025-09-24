@@ -1,0 +1,19 @@
+.border_column {
+  margin-top: rem-calc( 30px );
+  margin-bottom: rem-calc( 30px );
+  .rhweb-column {
+    padding: 20px;
+    border: 1px solid #eee !important;
+    @include media-breakpoint-down( lg ) {
+      margin-bottom: rem-calc( 20px );
+    }
+  }
+}
+
+.main_form {
+  .cms-element-form {
+    @include media-breakpoint-up( lg ) {
+      max-width: 60%;
+    }
+  }
+}

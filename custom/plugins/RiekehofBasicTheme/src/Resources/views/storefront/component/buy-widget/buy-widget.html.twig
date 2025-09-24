@@ -1,0 +1,23 @@
+{% sw_extends '@Storefront/storefront/component/buy-widget/buy-widget.html.twig' %}
+
+{% block buy_widget_ordernumber_container %}
+    {% if product.productNumber %}
+        <div class="product-detail-ordernumber-container">
+
+            {% block buy_widget_ordernumber_label %}
+                <span class="product-detail-ordernumber-label">
+                    {{ 'detail.productNumberLabel'|trans|sw_sanitize }}
+                </span>
+            {% endblock %}
+
+            {% block buy_widget_ordernumber %}
+                <meta itemprop="productID"
+                      content="{{ product.id }}">
+                <span class="product-detail-ordernumber"
+                      itemprop="sku">
+                    {{ product.properties.elements["0198ea4a495871a998c48cd4e4f658d4"].name }}
+                </span>
+            {% endblock %}
+        </div>
+    {% endif %}
+{% endblock %}

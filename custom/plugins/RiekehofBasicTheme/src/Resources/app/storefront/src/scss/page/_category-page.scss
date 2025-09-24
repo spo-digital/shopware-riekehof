@@ -1,0 +1,109 @@
+.category-page {
+  background-color: #fff7f2;
+
+  .cms-block-container:has(.main_headline) {
+    padding: 0 !important;
+    .col-12 {
+      padding: 0 !important;
+    }
+  }
+  .cms-element-image .cms-element-alignment {
+    width: 100% !important;
+    img {
+      width: 100%;
+    }
+  }
+
+  .cms-section-default {
+    @include media-breakpoint-down( lg ) {
+      display: flex;
+      align-items: center;
+    }
+  }
+  &__text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 25%;
+    text-align: center;
+    h1,h2,h3,h4,h5,h6 {
+      width: fit-content;
+      margin-bottom: 30px;
+      padding: 20px 20px 30px;
+      color: #2b3136;
+      font-size: 48px;
+      line-height: 1.2;
+      //background-color: $sw-color-brand-primary;
+      @include media-breakpoint-down(lg) {
+        margin: 0;
+        color: #fff;
+      }
+      @include media-breakpoint-up(lg) {
+        font-size: 72px;
+      }
+    }
+    @include media-breakpoint-down(lg) {
+      position: relative;
+      padding-right: 0;
+      justify-content: center;
+      background-color: #d0a7b9 ;
+    }
+  }
+
+
+  &__filter {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      //width: 100vw;
+      justify-content: flex-start;
+      p {
+        margin: 0;
+      }
+      a.btn {
+        background-color: rgba( 255, 255, 255, .6 );
+        color: #000;
+        border: none;
+        padding: 10px 30px;
+        transition-duration: .3s;
+        @media all and ( min-width: 991.98px) {
+          font-size: 24px;
+        }
+        &:hover {
+          transition-duration: .3s;
+          background-color: rgba( 255, 255, 255, 1 ) ;
+        }
+      }
+    }
+    @media all and ( min-width: 991.98px ) {
+      bottom: 20px;
+    }
+  }
+
+  .cms-element-sidebar-filter {
+    // display: none;
+  }
+
+  &__header {
+    position: relative;
+    section {
+      padding: 0 !important;
+      div.cms-block-container {
+        padding: 0!important;
+      }
+    }
+  }
+
+
+}

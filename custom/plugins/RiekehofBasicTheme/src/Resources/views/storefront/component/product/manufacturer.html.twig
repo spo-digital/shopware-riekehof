@@ -1,0 +1,24 @@
+{% sw_extends '@Storefront/storefront/utilities/offcanvas.html.twig' %}
+
+{% block utilities_offcanvas_content %}
+    {% block component_product_manufacturer_container %}
+        <div class="product-detail-description tab-pane-container">
+            {% block component_product_manufacturer_title %}
+                <h2 class="product-detail-manufacturer-title">
+                    Herstellerangaben
+                </h2>
+            {% endblock %}
+
+            {% block component_product_manufacturer_content %}
+                {% block component_product_manufacturer_content_text %}
+                    <div class="product-detail-manufacturer-text"
+                         itemprop="description">
+                        {{ page.product.manufacturer.description|raw }}
+                    </div>
+                {% endblock %}
+            {% endblock %}
+        </div>
+    {% endblock %}
+{% endblock %}
+
+

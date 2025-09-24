@@ -1,0 +1,34 @@
+.is-ctl-product {
+    .container-main {
+        background-color: #fff7f2;
+    }
+    .cms-block-product-heading {
+        padding-top: $spacer-xl;
+    }
+    .base-slider, .gallery-slider-thumbnails-item-inner, .quantity-selector-group {
+        background-color: #fff;
+    }
+    .product-heading-name-container {
+        max-width: calc(100% - 120px);
+    }
+    .product-heading-manufacturer-logo-container {
+        position: absolute;
+        right: 0;
+        top: -2rem;
+        z-index: 1;
+        .cms-element-manufacturer-logo {
+            mix-blend-mode: multiply;
+            .cms-image-container.is-standard img {
+                max-height: 120px;
+                width: 120px;
+                @media (max-width:768px) {
+                    position: absolute;
+                    right: -20px;
+                    width: 100px;
+                }
+            }
+        }
+    }
+
+
+}

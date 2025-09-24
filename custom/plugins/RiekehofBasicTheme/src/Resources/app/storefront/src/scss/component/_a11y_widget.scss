@@ -1,0 +1,221 @@
+
+
+// Farb-Variablen
+$baku: #444444;
+$moscow: #F5F5FF;
+$berlin: #684239;
+$paris: #f0f4ff;
+$amsterdam: #fefefe;
+$sofia: #7d7464;
+
+/* Skalierung per CSS-Variable (wirkt auf 1rem im Browser) */
+:root { --a11y-font-scale: 100%; }
+html { font-size: var(--a11y-font-scale); }
+
+/* Schwebende Aktionstaste (FAB) */
+#a11y-fab {
+  position: fixed;
+  inset: auto 24px 80px auto;
+  width: 45px;
+  height: 45px;
+  border-radius: 5px;
+  display: grid;
+  place-items: center;
+  background: $baku;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,.2);
+  z-index: 10000;
+  user-select: none;
+  transition-duration: .3s;
+  i {
+    font-size: 28px;
+  }
+  &:hover {
+    background-color: $sofia;
+    transition-duration: .3s;
+  }
+}
+
+#a11y-fab:focus-visible {
+  outline: 3px solid #ffd54f;
+  outline-offset: 3px;
+}
+
+/* Icon im FAB (falls SVG verwendet wird) */
+#a11y-fab svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Seitenpanel */
+#a11y-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100dvh;
+  width: min(92vw, 340px);
+  transform: translateX(100%);
+  transition: transform .25s ease;
+  background: #fff;
+  color: $berlin;
+  box-shadow: -16px 0 40px rgba(0,0,0,.18);
+  z-index: 10001;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+body.dark-mode #a11y-panel { background:#121212; color:#eee; }
+
+#a11y-panel[aria-hidden="false"] { transform: translateX(0); }
+
+.a11y-panel__header {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 16px 18px;
+  border-bottom: 1px solid rgba(0,0,0,.08);
+}
+
+body.dark-mode .a11y-panel__header { border-color: rgba(255,255,255,.12); }
+
+.a11y-panel__title { font-size: 1.1rem; font-weight: 700; }
+
+.a11y-panel__content {
+  padding: 12px 18px 20px;
+  overflow:auto;
+}
+
+.a11y-section { margin: 10px 0 14px; }
+.a11y-section h3 { margin: 0 0 8px; font-size: .95rem; font-weight: 700; }
+
+/* Buttons (Spans) */
+.a11y-btn {
+  display:inline-flex;
+  align-items:center;
+  gap: 8px;
+  width: fit-content;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,.15);
+  cursor:pointer;
+  user-select:none;
+}
+
+body.dark-mode .a11y-btn { border-color: rgba(255,255,255,.2); }
+
+.a11y-btn[aria-pressed="true"] {
+  outline: 2px solid $baku;
+  outline-offset: 2px;
+}
+
+.a11y-btn:focus-visible {
+  outline: 3px solid #ffd54f;
+  outline-offset: 3px;
+}
+
+.a11y-btn-group { display:flex; gap: 8px; flex-wrap:wrap; }
+
+/* Toggles (als Switches) */
+.a11y-toggle {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,.15);
+  max-inline-size: 100%;
+}
+
+body.dark-mode .a11y-toggle { border-color: rgba(255,255,255,.2); }
+
+.a11y-toggle input {
+  appearance:none;
+  inline-size: 44px;
+  block-size: 26px;
+  border-radius: 999px;
+  background:#bbb;
+  position: relative;
+  outline:none;
+  transition: background .2s;
+  flex: none;
+}
+
+.a11y-toggle input::after {
+  content:"";
+  position:absolute;
+  top: 5px;
+  left: 5px;
+  inline-size: 16px;
+  block-size: 16px;
+  border-radius:50%;
+  background:#fff;
+  transition: transform .2s;
+}
+
+.a11y-toggle input:checked { background:$baku; }
+
+.a11y-toggle input:checked::after {
+  transform: translateX(18px);
+}
+
+.a11y-toggle span {
+  min-inline-size: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+/* ---- Effekte auf der Seite ---- */
+
+/* Sans-serif */
+body.a11y-sans {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Noto Sans", "Helvetica Neue", Arial, sans-serif !important;
+}
+
+/* Links hervorheben */
+body.a11y-highlight-links a {
+  text-decoration: underline !important;
+  text-underline-offset: 2px;
+  font-weight: 700;
+  outline-offset: 2px;
+}
+
+body.a11y-highlight-links a:focus-visible {
+  outline: 3px solid #ffd54f !important;
+}
+
+/* Lesemodus */
+body.a11y-reader-mode img,
+body.a11y-reader-mode picture,
+body.a11y-reader-mode video,
+body.a11y-reader-mode canvas,
+body.a11y-reader-mode iframe,
+body.a11y-reader-mode [data-decorative],
+body.a11y-reader-mode [aria-hidden="true"] {
+  display: none !important;
+}
+
+body.a11y-reader-mode * { animation: none !important; transition: none !important; }
+body.a11y-reader-mode [style*="background-image"] { background-image: none !important; }
+
+/* Backdrop */
+#a11y-backdrop {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(0);
+  background: rgba(0,0,0,.0);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease;
+  z-index: 10000;
+}
+
+#a11y-backdrop[data-open="true"] {
+  opacity: .25;
+  background: rgba(0,0,0,.5);
+  pointer-events: auto;
+}
+

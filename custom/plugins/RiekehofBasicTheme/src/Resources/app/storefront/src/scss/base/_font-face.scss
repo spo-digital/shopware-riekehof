@@ -1,0 +1,45 @@
+
+
+@font-face {
+  font-family: 'BrushScriptBTWXX-Regular';
+  src: url('#{$app-css-relative-asset-path}/fonts/brushscript_regular.woff2') format('woff2'), url('#{$app-css-relative-asset-path}/fonts/brushscript_regular.woff2') format('woff');
+}
+/* roboto-slab-regular - latin */
+@font-face {
+  font-family: 'Roboto Slab';
+  font-style: normal;
+  font-weight: 400;
+  src: url('#{$app-css-relative-asset-path}/fonts/roboto-slab-v12-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local(''),
+  url('#{$app-css-relative-asset-path}/fonts/roboto-slab-v12-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('#{$app-css-relative-asset-path}/fonts/roboto-slab-v12-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+  url('#{$app-css-relative-asset-path}/fonts/roboto-slab-v12-latin-regular.woff') format('woff'), /* Modern Browsers */
+  url('#{$app-css-relative-asset-path}/fonts/roboto-slab-v12-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+  url('#{$app-css-relative-asset-path}/fonts/roboto-slab-v12-latin-regular.svg#RobotoSlab') format('svg'); /* Legacy iOS */
+}
+/* roboto-slab-700 - latin */
+@font-face {
+  font-family: 'Roboto Slab';
+  font-style: normal;
+  font-weight: 700;
+  src: url('#{$app-css-relative-asset-path}/fonts/roboto-slab-v12-latin-700.eot'); /* IE9 Compat Modes */
+  src: local(''),
+  url('#{$app-css-relative-asset-path}/fonts/roboto-slab-v12-latin-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('#{$app-css-relative-asset-path}/fonts/roboto-slab-v12-latin-700.woff2') format('woff2'), /* Super Modern Browsers */
+  url('#{$app-css-relative-asset-path}/fonts/roboto-slab-v12-latin-700.woff') format('woff'), /* Modern Browsers */
+  url('#{$app-css-relative-asset-path}/fonts/roboto-slab-v12-latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
+  url('#{$app-css-relative-asset-path}/fonts/roboto-slab-v12-latin-700.svg#RobotoSlab') format('svg'); /* Legacy iOS */
+}
+/* pacifico-regular - latin */
+@font-face {
+  font-family: 'Pacifico';
+  font-style: normal;
+  font-weight: 400;
+  src: url('#{$app-css-relative-asset-path}/fonts/pacifico-v17-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local(''),
+  url('#{$app-css-relative-asset-path}/fonts/pacifico-v17-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('#{$app-css-relative-asset-path}/fonts/pacifico-v17-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+  url('#{$app-css-relative-asset-path}/fonts/pacifico-v17-latin-regular.woff') format('woff'), /* Modern Browsers */
+  url('#{$app-css-relative-asset-path}/fonts/pacifico-v17-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+  url('#{$app-css-relative-asset-path}/fonts/pacifico-v17-latin-regular.svg#Pacifico') format('svg'); /* Legacy iOS */
+}

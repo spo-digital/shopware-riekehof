@@ -1,0 +1,17 @@
+.navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
+  color:#a15e38;
+}
+
+.main-navigation-link.root.active .main-navigation-link-text {
+  border-color: #a15e38;
+}
+.nav-link:focus-visible {
+  box-shadow: 0 0 0 0.125rem #a15e38;
+}
+li.nav-item:first-child {
+  padding-right: 0 !important;
+}
+a.nav-link.home-link {
+  display: none;
+}
+

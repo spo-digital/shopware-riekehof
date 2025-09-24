@@ -1,0 +1,80 @@
+{% sw_extends '@Storefront/storefront/component/product/listing.html.twig' %}
+
+
+{% block element_product_listing_pagination_nav_actions %}
+  <div class="cms-element-product-listing-actions row justify-content-between align-items-center">
+    <div class="col-12 col-lg-auto mb-3 mb-lg-0">
+      {% set hasProperties = app.request.get('properties') is not empty %}
+
+      <button
+          class="btn btn-outline-primary filter-panel-wrapper-toggle{{ hasProperties ? ' active' : '' }}"
+          type="button"
+          data-off-canvas-filter="true"
+          aria-haspopup="true"
+          aria-expanded="false">
+        {% sw_icon 'sliders-horizontal' style { size: 'sm' } %}
+        {{ hasProperties ? 'Filter ändern' : 'listing.filterTitleText'|trans }}
+      </button>
+
+    </div>
+    <div class="col-12 col-lg-auto">
+      {% sw_include '@Storefront/storefront/component/sorting.html.twig' with {
+        current: searchResult.sorting, sortings: searchResult.availableSortings
+      } %}
+    </div>
+  </div>
+{% endblock %}
+
+
+{% block product_listing %}
+  <div id="ocf-source"
+       class="filter-panel-wrapper d-none"
+       data-off-canvas-filter-content="true"
+       hidden aria-hidden="true"></div>
+  {{ parent() }}
+{% endblock %}
+
+
+{% block element_product_listing_row %}
+  <template id="filter-panel-template">
+    {% sw_include '@Storefront/storefront/component/listing/filter-panel.html.twig' with {
+      listing: searchResult, sidebar: false, ariaLiveUpdates: true
+    } %}
+  </template>
+
+  <script>
+    (function () {
+      var TPL='filter-panel-template', SRC='ocf-source';
+      function eq(a,b){return (a||'').replace(/\s+/g,' ').trim()===(b||'').replace(/\s+/g,' ').trim();}
+      function sync() {
+        var tpl=document.getElementById(TPL), src=document.getElementById(SRC);
+        if(!tpl||!src) return;
+        var html=tpl.innerHTML;
+        if(!eq(src.innerHTML, html)) {
+          src.innerHTML = html;
+          try {
+            if (window.PluginManager?.initializePlugins) {
+              window.PluginManager.initializePlugins(src);
+            }
+          } catch(e){}
+        }
+      }
+      document.addEventListener('DOMContentLoaded', function(){ requestAnimationFrame(sync); });
+      document.addEventListener('click', function(e){
+        if (e.target.closest('[data-off-canvas-filter="true"], .filter-active-remove, .filter-reset-all')) {
+          setTimeout(sync, 120);
+        }
+      });
+      document.body.addEventListener('change', function(e){
+        if (e.target.closest('.filter-panel')) setTimeout(sync, 60);
+      });
+      var tpl=document.getElementById(TPL);
+      if (tpl && 'MutationObserver' in window) {
+        new MutationObserver(function(){ requestAnimationFrame(sync); })
+          .observe(tpl, {childList:true, subtree:true, characterData:true});
+      }
+    })();
+  </script>
+
+  {{ parent() }}
+{% endblock %}

@@ -1,0 +1,18 @@
+/* Error: Undefined variable.
+ *   ,
+ * 5 |   src: url('#{$app-css-relative-asset-path}/fonts/brushscript_regular.woff2') format('woff2'), url('#{$app-css-relative-asset-path}/fonts/brushscript_regular.woff2') format('woff');
+ *   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ *   '
+ *   base\_font-face.scss 5:15  @import
+ *   base.scss 17:1             root stylesheet */
+
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: Undefined variable.\a   \2577 \a 5 \2502    src: url('#{$app-css-relative-asset-path}/fonts/brushscript_regular.woff2') format('woff2'), url('#{$app-css-relative-asset-path}/fonts/brushscript_regular.woff2') format('woff');\d\a   \2502                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\a   \2575 \a   base\\_font-face.scss 5:15  @import\a   base.scss 17:1             root stylesheet";
+}

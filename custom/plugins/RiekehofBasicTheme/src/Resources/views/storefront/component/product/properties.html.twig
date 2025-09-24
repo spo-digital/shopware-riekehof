@@ -1,0 +1,56 @@
+{% sw_extends '@Storefront/storefront/component/product/properties.html.twig' %}
+
+{#
+    0197b18b4aa9704bb9a4ed90b1134998 -> Geeignet für Arthrose
+    0197b18b8943738baa8acab4ffe29c69 -> Geeignet für Diabetiker
+    0197b18b4aa5704681b2c0f7a6511f0b -> Geeignet für Einlagen
+    0197b18b4ab670e7ad3b7e5a3e28b5f0 -> Geeignet für Fersensporn
+    0197b18b4aad7041b06ab34a4f8929c6 -> Geeignet für Hallux Valgus
+    0197b18b4ab272fc980c3c926a1e8a79 -> Geeignet für Rückenschonend
+#}
+{# Mapping: Option-ID -> Template-Pfad der SVG-Datei #}
+{% set svgPathById = {
+    '0197b18b4aa9704bb9a4ed90b1134998': '/bundles/riekehofbasictheme/icons/riekehof_icon_arthrose.svg',
+    '0197b18b8943738baa8acab4ffe29c69': '/bundles/riekehofbasictheme/icons/riekehof_icon_diabetiker.svg',
+    '0197b18b4aa5704681b2c0f7a6511f0b': '/bundles/riekehofbasictheme/icons/riekehof_icon_einlagen.svg',
+    '0197b18b4ab670e7ad3b7e5a3e28b5f0': '/bundles/riekehofbasictheme/icons/riekehof_icon_fersensporn.svg',
+    '0197b18b4aad7041b06ab34a4f8929c6': '/bundles/riekehofbasictheme/icons/riekehof_icon_hallux-valgus.svg',
+    '0197b18b4ab272fc980c3c926a1e8a79': '/bundles/riekehofbasictheme/icons/riekehof_icon_arthrose.svg'
+} %}
+
+{% block component_product_properties_inner %}
+    <div class="product-detail-properties">
+
+        {% block component_product_properties_container %}
+            <div class="row product-detail-properties-container">
+
+                    {# SPO 2025-09-08: Ausgabe der Eigenschaften "Geeignet für..." #}
+                    {% block component_product_properties_icons %}
+                        {% set found = page.product.sortedProperties.elements|filter(e => e.id in svgPathById|keys) %}
+                        {% if found is not empty %}
+                            <div class="col-12 mb-4">
+                                <h3 class="property-feature-set-headline">Geeignet für</h3>
+                            </div>
+                            {% set printed = [] %}
+
+                            {% for e in page.product.sortedProperties.elements %}
+                                {% if e.id in svgPathById|keys and (e.id not in printed) %}
+                                    <div class="col-4 col-md-3 col-lg-2">
+                                        <div class="property-feature d-flex gap-2">
+                                            <img src="{{ svgPathById[e.id] }}" alt="{{ e.translated.name }}" class="property-feature__icon" />
+                                            <p class="property-feature__title m-0">{{ e.translated.description }}</p>
+                                        </div>
+                                    </div>
+                                    {% set printed = printed|merge([e.id]) %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    {% endblock %}
+                    {# SPO 2025-09-08: END #}
+
+                    {% block component_product_properties_table %}
+                    {% endblock %}
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}

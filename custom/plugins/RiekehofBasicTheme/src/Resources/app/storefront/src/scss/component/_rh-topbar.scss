@@ -1,0 +1,35 @@
+.rh-topbar {
+  position: relative;
+  &::before {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    content: "";
+    width: 50%;
+    height: 2px;
+    border: none;
+    background: linear-gradient(to left, rgba(0,0,0,0.3), rgba(0,0,0,0));
+
+
+  }
+  &__list {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 0;
+    padding: rem-calc( 10px ) 0;
+    list-style: none;
+    font-size: rem-calc( 16px );
+
+    li {
+      margin-right: rem-calc( 10px );
+      padding-right: rem-calc( 10px );
+      border-right: 1px solid #684239;
+      &:last-child {
+        margin-right: 0;
+        padding-right: 0;
+        border: none;
+      }
+    }
+  }
+}

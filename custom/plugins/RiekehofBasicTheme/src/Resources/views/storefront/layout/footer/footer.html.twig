@@ -1,0 +1,285 @@
+{% sw_extends '@Storefront/storefront/layout/footer/footer.html.twig' %}
+
+{% block layout_footer_inner_container %}
+  <div class="footer-top">
+    <div class="container">
+      {% block layout_footer_navigation %}
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-auto">
+            {% block layout_footer_navigation_columns %}
+              <h3 class="footer-main__title">Shop Service</h3>
+              <ul class="footer-main__link_list">
+                {% for root in footer.navigation.tree %}
+                  {% block layout_footer_navigation_column %}
+                    <li>
+                      {% block layout_footer_navigation_information_headline %}
+
+                        {% if root.category.type == 'folder' %}
+                          {{ root.category.translated.name }}
+                        {% else %}
+                          <a href="{{ category_url(root.category) }}"
+                             {% if category_linknewtab(root.category) %}target="_blank"{% endif %}
+                             title="{{ root.category.translated.name }}">
+                            {{ root.category.translated.name }}
+                          </a>
+                        {% endif %}
+
+                        {% block layout_footer_navigation_information_icons %}
+                          {% if root.children|length > 0 %}
+                            <button class="footer-column-toggle btn btn-link btn-link-inline js-collapse-footer-column-trigger"
+                                    data-bs-target="#collapseFooter{{ loop.index }}"
+                                    data-bs-toggle="collapse"
+                                    aria-controls="collapseFooter{{ loop.index }}"
+                                    aria-labelledby="collapseFooterTitle{{ loop.index }}"
+                                    aria-expanded="true">
+
+                              {% sw_icon 'plus' style {
+                                class: 'footer-plus'
+                              } %}
+
+                              {% sw_icon 'minus' style {
+                                class: 'footer-minus'
+                              } %}
+                            </button>
+                          {% endif %}
+                        {% endblock %}
+                      {% endblock %}
+                    </li>
+                  {% endblock %}
+                {% endfor %}
+              </ul>
+            {% endblock %}
+          </div>
+          <div class="col-12 col-md-auto">
+            {% block layout_footer_service_menu %}
+              {% block layout_footer_service_menu_content %}
+                <h3 class="footer-main__title">Informationen</h3>
+                <ul class="footer-main__link_list">
+                  {% for serviceMenuItem in footer.serviceMenu %}
+                    {% block layout_footer_service_menu_item %}
+                      <li>
+                        <a
+                            href="{{ category_url(serviceMenuItem) }}"
+                            {% if category_linknewtab(serviceMenuItem) %}target="_blank"{% endif %}
+                            title="{{ serviceMenuItem.translated.name }}">
+                          {{ serviceMenuItem.translated.name }}
+                        </a>
+                      </li>
+                    {% endblock %}
+                  {% endfor %}
+                </ul>
+              {% endblock %}
+            {% endblock %}
+          </div>
+          <div class="col-12 col-md-4">
+            <h3 class="footer-main__title">Zahlung und Versand</h3>
+              {% block layout_footer_payment_shipping_logos %}
+                  <ul class="footer-payment-logos">
+                      {% block layout_footer_payment_logos %}
+                          <li>
+                              <img src="https://riekehof.dev.spo.digital/media/22/6d/d1/1757843946/payment_cash_free.png?ts=1757929444" width="100" alt="Barzahlung">
+                          </li>
+                          <li>
+                              <img src="https://riekehof.dev.spo.digital/media/b8/85/bd/1757844049/payment_giro_free.png?ts=1757929408" width="100" alt="Girocard Zahlung bei Abholung">
+                          </li>
+                          <li>
+                              <img src="https://riekehof.dev.spo.digital/media/40/94/66/1757929719/payment_paypal_free.png?ts=1757929778" width="100" alt="Paypal">
+                          </li>
+                          <li>
+                              <img src="https://riekehof.dev.spo.digital/media/fe/93/8e/1757929719/payment_debitcard_free.png?ts=1757929789" width="100" alt="Kreditkarte">
+                          </li>
+                          <li>
+                              <img src="https://riekehof.dev.spo.digital/media/54/13/9a/1757929719/payment_sepa_free.png?ts=1757929798" width="100" alt="SEPA-Lastschrift">
+                          </li>
+                          <li>
+                              <img src="https://riekehof.dev.spo.digital/media/43/b3/cb/1757844189/payment_invoice_free.png?ts=1757929433" width="100" alt="Kauf auf Rechnung">
+                          </li>
+                          <li>
+                              <img src="https://riekehof.dev.spo.digital/media/82/48/a3/1757844124/payment_prepaid_free.png?ts=1757929361" width="100" alt="Vorkasse">
+                          </li>
+                          <li>
+                              <img src="https://riekehof.dev.spo.digital/media/b2/4a/22/1757929719/payment_ideal_free.png?ts=1757929809" width="100" alt="iDeal">
+                          </li>
+                          <li>
+                              <img src="https://riekehof.dev.spo.digital/media/89/44/g0/1757929719/payment_applepay_free.png?ts=1757929820" width="100" alt="Apple Pay">
+                          </li>
+                      {% endblock %}
+                  </ul>
+                  <ul class="footer-shipping-logos">
+                      {% block layout_footer_shipping_logos %}
+                          {% for shippingMethod in footer.shippingMethods %}
+                              {% block layout_footer_shipping_logo %}
+                                  {% if shippingMethod.media %}
+                                      <li class="footer-logo is-shipping">
+                                          {% sw_thumbnails 'footer-shipping-image-thumbnails' with {
+                                              media: shippingMethod.media,
+                                              sizes: {
+                                                  default: '100px'
+                                              },
+                                              attributes: {
+                                                  class: 'img-fluid footer-logo-image',
+                                                  alt: (shippingMethod.media.translated.alt ?: shippingMethod.translated.name),
+                                                  title: (shippingMethod.media.translated.title ?: shippingMethod.translated.name)
+                                              }
+                                          } %}
+                                      </li>
+                                  {% endif %}
+                              {% endblock %}
+                          {% endfor %}
+                      {% endblock %}
+                  </ul>
+              {% endblock %}
+            <h3 class="footer-main__title">Folgen Sie uns auf:</h3>
+            <div id="social-sidebar" class="">
+              <ul>
+                <li>
+                  <a href="https://www.facebook.com/schuhmoderiekehof" aria-label="Facebook">
+                    <i class="fa fa-facebook-official" aria-hidden="true"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.instagram.com/schuhmoderiekehof/" aria-label="Instagram">
+                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      {% endblock %}
+    </div>
+  </div>
+    {% block layout_footer_bottom %}
+        <div class="footer-bottom">
+
+
+            {% block layout_footer_vat %}
+                {% set cmsPath = 'frontend.cms.page.full' %}
+
+                {% if showVatNotice or showVatNotice is not defined %}
+                    <div class="footer-vat">
+                        {% set shippingSnippetKey = context.taxState == 'gross' ? 'footer.includeVatTextPage' : 'footer.excludeVatTextPage' %}
+
+                        <p>
+                            {{ shippingSnippetKey|trans({
+                                '%url%': path(cmsPath, { id: config('core.basicInformation.shippingPaymentInfoPage') }),
+                                '%star%': ''
+                            })|raw }}
+                        </p>
+                    </div>
+                {% endif %}
+            {% endblock %}
+
+            {% block layout_footer_copyright %}
+
+            {% endblock %}
+        </div>
+    {% endblock %}
+
+    <div class ="rsce_google_review">
+      <button class="rsce_google_review__close">
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </button>
+      <div class="rsce_google_review__content">
+        <div class="rsce_google_review__wrapper">
+          <img src="https://riekehof.dev.spo.digital/media/af/f8/ee/1752054741/google.svg?ts=1752054741" alt="Google Logo" title="Google Reviews">
+          <div class="rsce_google_review__container">
+            <p class="rsce_google_review__title">
+              Google Bewertung
+            </p>
+            <div class="rsce_google_review__rating">
+              <p id="ratingStars">
+                <span id="google_rating"></span>
+                <span id="stars"></span>
+              </p>
+            </div>
+            <p class="rsce_google_review__text">Basierend auf <span id="userRatingsTotal"><?= $userRatingsTotal ?></span>
+              Bewertungen <br> aus unsere Filialen:</p>
+            <div class="rsce_google_review__links">
+              <a href="https://www.google.com/maps/place/Schuhmode+Riekehof+GmbH/@51.9915411,8.7879286,17z/data=!4m8!3m7!1s0x47ba41a01396bbbf:0x1ed3301e58cdb003!8m2!3d51.9915379!4d8.7927995!9m1!1b1!16s%2Fg%2F1v6l6lmx?entry=ttu" class="rsce_google_review__button">
+                <span>Lage</span>
+              </a>
+              <a href="https://www.google.com/maps/place/Schuhmode+Riekehof+GmbH/@51.9333795,8.8754711,17z/data=!3m1!4b1!4m6!3m5!1s0x47ba449a54845b8b:0x1d3cb1e57ed42d79!8m2!3d51.9333762!4d8.878046!16s%2Fg%2F11bvt38433?entry=ttu" class="rsce_google_review__button">
+                <span>Detmold</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <button id="toggle-shopauskunft" aria-controls="shopauskunft-widget_wrapper" aria-expanded="false" class="shopauskunft-btn">
+      <i class="fa fa-star-o" aria-hidden="true"></i>
+        <span class="sr-only">Bewertungen</span>
+    </button>
+
+    <div id="shopauskunft-widget_wrapper" class="position-fixed d-none" style="bottom: 210px; left: 0; z-index: 999999;">
+        <div class="shopauskunft-widget desktop"
+             data-widget-id="81ec564c4bdd"
+             data-widget-theme="light"
+             data-retailer-id="riekehofde"
+             data-widget-locale="de_DE">&nbsp;</div>
+        <div class="shopauskunft-widget mobile"
+             data-widget-id="471ead25002d"
+             data-widget-theme="light"
+             data-retailer-id="riekehofde"
+             data-widget-locale="de_DE">&nbsp;</div>
+    </div>
+
+    <script src="https://widget.shopauskunft.de/assets/widget.js" type="text/javascript"></script>
+
+    <!-- FAB -->
+    <span id="a11y-fab" role="button" tabindex="0" aria-label="Zugänglichkeitseinstellungen öffnen" aria-controls="a11y-panel" aria-expanded="false">
+        <i class="fa fa-universal-access" aria-hidden="true"></i>
+    </span>
+
+    <div id="a11y-backdrop" aria-hidden="true"></div>
+
+    <!-- Panel -->
+    <aside id="a11y-panel" role="dialog" aria-modal="false" aria-labelledby="a11y-title" aria-hidden="true">
+        <div class="a11y-panel__header">
+            <div class="a11y-panel__title" id="a11y-title">Zugänglichkeit</div>
+            <span id="a11y-close" class="a11y-btn" role="button" tabindex="0" aria-label="Panel schließen">✕</span>
+        </div>
+
+        <div class="a11y-panel__content">
+            <!-- Schriftgröße -->
+            <div class="a11y-section">
+                <h3>Schriftgröße</h3>
+                <div class="a11y-btn-group" role="group" aria-label="Schriftgröße">
+                    <span id="a11y-font-dec" class="a11y-btn" role="button" tabindex="0" aria-label="Schriftgröße verringern">A−</span>
+                    <span id="a11y-font-reset" class="a11y-btn" role="button" tabindex="0" aria-label="Schriftgröße auf 100 % zurücksetzen">100%</span>
+                    <span id="a11y-font-inc" class="a11y-btn" role="button" tabindex="0" aria-label="Schriftgröße erhöhen">A+</span>
+                </div>
+            </div>
+
+            <!-- Modus ohne Ablenkungen -->
+            <div class="a11y-section">
+                <h3>Modus ohne Ablenkungen</h3>
+                <label class="a11y-toggle">
+                    <input id="a11y-reader" type="checkbox" role="switch" aria-label="Modus ohne Ablenkungen">
+                    <span>Seite vereinfachen (Medien und Animationen ausblenden)</span>
+                </label>
+            </div>
+
+            <!-- Links hervorheben -->
+            <div class="a11y-section">
+                <h3>Links hervorheben</h3>
+                <label class="a11y-toggle">
+                    <input id="a11y-links" type="checkbox" role="switch" aria-label="Links hervorheben">
+                    <span>Links unterstreichen und betonen</span>
+                </label>
+            </div>
+
+            <!-- Einfache Schrift -->
+            <div class="a11y-section">
+                <h3>Einfache Schrift</h3>
+                <label class="a11y-toggle">
+                    <input id="a11y-sans" type="checkbox" role="switch" aria-label="Einfache Schrift">
+                    <span>Schrift durch Sans-Serif ersetzen</span>
+                </label>
+            </div>
+        </div>
+    </aside>
+{% endblock %}

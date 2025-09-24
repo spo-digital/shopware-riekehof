@@ -1,0 +1,164 @@
+{% sw_extends '@Storefront/storefront/element/cms-element-product-description-reviews.html.twig' %}
+
+{% block element_product_description_reviews %}
+    {% set config = element.fieldConfig.elements %}
+    {% set product = element.data.product %}
+    {% set descriptionTabId = "description-tab-" ~ product.id %}
+    {% set descriptionTabHref = "#description-tab-" ~ product.id ~ "-pane" %}
+    {% set descriptionTabContent = "description-tab-" ~ product.id ~ "-pane" %}
+    {% set reviewTabId = "review-tab-" ~ product.id %}
+    {% set reviewTabHref = "#review-tab-" ~ product.id ~ "-pane" %}
+    {% set reviewTabContent = "review-tab-" ~ product.id ~ "-pane" %}
+    {% set manufacturerTabId = "manufacturer-tab-" ~ product.id %}
+    {% set manufacturerTabHref = "#manufacturer-tab-" ~ product.id ~ "-pane" %}
+    {% set manufacturerTabContent = "manufacturer-tab-" ~ product.id ~ "-pane" %}
+
+    {% if element.data.product %}
+
+        {# Bestimme, welcher Tab aktiv sein soll (Priorität: Beschreibung > Hersteller > Bewertung) #}
+        {% set showDescription = product.translated.description is not empty %}
+        {% set showReview = config('core.listing.showReview') %}
+        {% set showManufacturer = product.manufacturer is defined and product.manufacturer.translated.description is not empty %}
+
+        {% set isActiveDescriptionTab = showDescription %}
+        {% set isActiveManufacturerTab = not isActiveDescriptionTab and showManufacturer %}
+        {% set isActiveReviewTab = not isActiveDescriptionTab and not isActiveManufacturerTab and showReview %}
+
+        <div class="product-detail-tabs cms-element-{{ element.type }}{% if config.alignment.value %} has-vertical-alignment{% endif %}">
+            {% if config.alignment.value %}
+            <div class="cms-element-alignment{% if config.alignment.value == "center" %} align-self-center{% elseif config.alignment.value == "flex-end" %} align-self-end{% else %} align-self-start{% endif %}">
+                {% endif %}
+                <div class="card card-tabs">
+                    {% block element_product_description_reviews_tabs_navigation %}
+                        <div class="cms-card-header card-header product-detail-tab-navigation product-description-reviews-tab-navigation">
+                            {% block element_product_description_reviews_tabs_navigation_container %}
+                                <ul class="nav nav-tabs product-detail-tab-navigation-list"
+                                    id="product-detail-tabs"
+                                    role="tablist">
+
+                                    {% block element_product_description_reviews_tabs_navigation_description %}
+                                        {% if showDescription %}
+                                            <li class="nav-item">
+                                                <a class="nav-link {% if isActiveDescriptionTab %}active{% endif %} product-detail-tab-navigation-link description-tab"
+                                                   id="{{ descriptionTabId }}"
+                                                   data-bs-toggle="tab"
+                                                   data-off-canvas-tabs="true"
+                                                   href="{{ descriptionTabHref }}"
+                                                   role="tab"
+                                                   aria-controls="{{ descriptionTabContent }}"
+                                                   aria-selected="{{ isActiveDescriptionTab ? 'true' : 'false' }}">
+                                                    <span>{{ "detail.tabsDescription"|trans|sw_sanitize }}</span>
+                                                    <span class="product-detail-tab-navigation-icon">
+                                                        {% sw_icon 'arrow-medium-right' style {'pack':'solid'} %}
+                                                    </span>
+                                                    <span class="product-detail-tab-preview">
+                                                        {{ product.translated.description|raw|striptags|sw_sanitize|u.truncate(125, '…') }}
+                                                        {% if product.translated.description|length >= 126 %}
+                                                            <span class="product-detail-tab-preview-more">{{ "detail.tabsPreviewMore"|trans|sw_sanitize }}</span>
+                                                        {% endif %}
+                                                    </span>
+                                                </a>
+                                            </li>
+                                        {% endif %}
+                                    {% endblock %}
+
+                                    {% block element_product_description_reviews_tabs_navigation_review %}
+                                        {% if showReview %}
+                                            <li class="nav-item">
+                                                <a class="nav-link {% if isActiveReviewTab %}active{% endif %} product-detail-tab-navigation-link review-tab"
+                                                   id="{{ reviewTabId }}"
+                                                   data-bs-toggle="tab"
+                                                   data-off-canvas-tabs="true"
+                                                   href="{{ reviewTabHref }}"
+                                                   role="tab"
+                                                   aria-controls="{{ reviewTabContent }}"
+                                                   aria-selected="{{ isActiveReviewTab ? 'true' : 'false' }}">
+                                                    {{ "detail.tabsReview"|trans|sw_sanitize }}
+                                                    <span class="product-detail-tab-navigation-icon">
+                                                        {% sw_icon 'arrow-medium-right' style {'pack':'solid'} %}
+                                                    </span>
+                                                </a>
+                                            </li>
+                                        {% endif %}
+                                    {% endblock %}
+
+                                    {% block element_product_description_reviews_tabs_navigation_manufacturer %}
+                                        {% if showManufacturer %}
+                                            <li class="nav-item">
+                                                <a class="nav-link {% if isActiveManufacturerTab %}active{% endif %} product-detail-tab-navigation-link"
+                                                   id="{{ manufacturerTabId }}"
+                                                   data-bs-toggle="tab"
+                                                   data-off-canvas-tabs="true"
+                                                   href="{{ manufacturerTabHref }}"
+                                                   role="tab"
+                                                   aria-controls="{{ manufacturerTabContent }}"
+                                                   aria-selected="{{ isActiveManufacturerTab ? 'true' : 'false' }}">
+                                                    <span>Herstellerangaben</span>
+                                                    <span class="product-detail-tab-navigation-icon">
+                                                        {% sw_icon 'arrow-medium-right' style {pack:'solid'} %}
+                                                    </span>
+                                                </a>
+                                            </li>
+                                        {% endif %}
+                                    {% endblock %}
+
+                                </ul>
+                            {% endblock %}
+                        </div>
+                    {% endblock %}
+
+                    {% block element_product_description_reviews_tabs_content %}
+                        <div class="product-detail-tabs-content card-body">
+                            {% block element_product_description_reviews_tabs_content_container %}
+                                <div class="tab-content">
+                                    {% block element_product_description_reviews_tabs_content_description %}
+                                        {% if showDescription %}
+                                            <div class="tab-pane fade show {% if isActiveDescriptionTab %}active{% endif %}"
+                                                 id="{{ descriptionTabContent }}"
+                                                 role="tabpanel"
+                                                 aria-labelledby="{{ descriptionTabId }}">
+                                                {% sw_include '@Storefront/storefront/component/product/description.html.twig' with {
+                                                    product: product
+                                                } %}
+                                            </div>
+                                        {% endif %}
+                                    {% endblock %}
+
+                                    {% block element_product_description_reviews_tabs_content_review %}
+                                        {% if showReview %}
+                                            <div class="tab-pane fade show {% if isActiveReviewTab %}active{% endif %}"
+                                                 id="{{ reviewTabContent }}"
+                                                 role="tabpanel"
+                                                 aria-labelledby="{{ reviewTabId }}">
+                                                {% sw_include '@Storefront/storefront/component/review/review.html.twig' with {
+                                                    reviews: element.data.reviews,
+                                                    product: product
+                                                } %}
+                                            </div>
+                                        {% endif %}
+                                    {% endblock %}
+
+                                    {% block element_product_description_reviews_tabs_content_manufacturer %}
+                                        {% if showManufacturer %}
+                                            <div class="tab-pane fade show {% if isActiveManufacturerTab %}active{% endif %}"
+                                                 id="{{ manufacturerTabContent }}"
+                                                 role="tabpanel"
+                                                 aria-labelledby="{{ manufacturerTabId }}">
+                                                {% sw_include '@Storefront/storefront/component/product/manufacturer.html.twig' with {
+                                                    product: product
+                                                } %}
+                                            </div>
+                                        {% endif %}
+                                    {% endblock %}
+                                </div>
+                            {% endblock %}
+                        </div>
+                    {% endblock %}
+
+                </div>
+                {% if config.verticalAlign.value %}
+            </div>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,8 @@
+/*
+CMS sections
+*/
+.cms-section-sidebar .cms-section-sidebar-sidebar-content {
+  @include media-breakpoint-down(lg) {
+    display: none;
+  }
+}
